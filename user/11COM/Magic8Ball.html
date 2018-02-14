@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Magic 8 Ball</title>
+      
+        <style type="text/css">
+            #button{
+                text-align: center; 
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="button">
+        
+            <h1>Ask Magic 8 Ball a question and click</h1>
+            
+            <button onclick="playAudio()" type="button"><img src="Random Downloads/magic8balll.jpg"></button>
+        
+        
+            <audio id="myaudio">
+            <source src="Random Downloads/Cha_Ching.mp3" type="audio/mpeg">
+            </audio>
+        
+            <script>
+                
+                var x = document.getElementById("myaudio"); 
+                function playAudio() {x.play();}
+            </script>
+        
+        </div>    
+    </body>
+</html>
