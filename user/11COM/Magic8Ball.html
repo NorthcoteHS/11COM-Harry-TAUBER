@@ -14,9 +14,9 @@
     <body>
         <div id="button">
         
-            <h1>Ask Magic 8 Ball a question and click</h1>
+            <h1 id="question">Ask Magic 8 Ball a question and click</h1>
             
-            <button onclick="playAudio()" type="button"><img src="Random Downloads/magic8balll.jpg"></button>
+            <button onclick="ChooseReply()" type="button"><img src="Random Downloads/magic8balll.jpg"></button>
         
         
             <audio id="myaudio">
@@ -24,9 +24,30 @@
             </audio>
         
             <script>
-                
                 var x = document.getElementById("myaudio"); 
-                function playAudio() {x.play();}
+                
+            function ChooseReply() {
+                var y = Math.floor(Math.random() * 4);
+                if (y == 1){
+                question.innerHTML = "Yes";    
+                }if (y == 2){
+                    question.innerHTML = "No";
+                }if (y == 3){
+                    question.innerHTML = "Maybe";
+                }
+                x.play();
+                
+                
+                var c = prompt("Ask Magic 8 Ball a question");
+
+                if (c == null || person == "") {
+                txt = "User cancelled the prompt.";
+                } else {
+                txt = "You are 16 years old";
+                }
+                
+            }
+                
             </script>
         
         </div>    
