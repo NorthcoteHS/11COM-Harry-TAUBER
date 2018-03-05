@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+      
+<head>
+  
+    <style type="text/css">
+        body{
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #333;
+        }
+        .question{
+    font-weight: 600;
+    color: dodgerblue;
+        }
+        .answers {
+  margin-bottom: 20px;
+  color: aliceblue;
+        }
+        .answers label{
+  display: block;
+        }
+        #submit{
+    font-family: sans-serif;
+    font-size: 20px;
+    background-color: #279;
+    color: #fff;
+    border: 0px;
+    border-radius: 3px;
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+        }
+        #submit:hover{
+        background-color: #38a;
+        }
+       body{
+            background-image: url('job.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;    
+        }
+        
+         #header{
+            text-align: center;
+            font-family: arial;
+        }
+        #pic{
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 80px;
+            width:200px;
+            margin-left: 150px;
+            margin-top: 120px;
+        }
+        #bells{
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 80px;
+            width:200px;
+            margin-left: 170px;
+            margin-top: 235px;
+        </style>
+      
+</head>    
+    
+    <body>
+        <h1 id="header">Surfer Dude Quiz</h1>
+    
+        <div id="quiz"></div>
+        <button id="submit">Submit Quiz</button>
+        <div id="results"></div>
+        
+        <img id="pic" src='360.gif'>
+        <img id='bells' src="bells.jpg">
+        
+        <script>
+            (function() {
+  function buildQuiz() {
+    // we'll need a place to store the HTML output
+    const output = [];
+
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // we'll want to store the list of answer choices
+      const answers = [];
+
+      // and for each available answer...
+      for (letter in currentQuestion.answers) {
+        // ...add an HTML radio button
+        answers.push(
+          `<label>
+            <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter} :
+            ${currentQuestion.answers[letter]}
+          </label>`
+        );
+      }
+
+      // add this question and its answers to the output
+      output.push(
+        `<div class="question"> ${currentQuestion.question} </div>
+        <div class="answers"> ${answers.join("")} </div>`
+      );
+    });
+
+    // finally combine our output list into one string of HTML and put it on the page
+    quizContainer.innerHTML = output.join("");
+  }
+
+  function showResults() {
+    // gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll(".answers");
+
+    // keep track of user's answers
+    let numCorrect = 0;
+
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // find selected answer
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+      // if answer is correct
+      if (userAnswer === currentQuestion.correctAnswer) {
+        // add to the number of correct answers
+        numCorrect++;
+
+        // color the answers green
+        answerContainers[questionNumber].style.color = "lightgreen";
+      } else {
+        // if answer is wrong or blank
+        // color the answers red
+        answerContainers[questionNumber].style.color = "red";
+      }
+    });
+
+    // show number of correct answers out of total
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  }
+
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
+  const myQuestions = [
+     {
+        question: "What surf manouevre is this",
+        answers: {
+          a: "Cutback",
+          b: "360 air",
+          c: "Floater"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What is this iconic surf location?",
+        answers: {
+          a:  "Bells Beach",
+          b: "Pipeline",
+          c: "Nazare"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "Who has won the most WSL titles?",
+        answers: {
+          a: "Jamie O'brien",
+          b: "Kelly Slater",
+          c: "Andy Irons",
+          d: "Mick Fanning"
+        },
+        correctAnswer: "b"
+      }
+  ];
+
+  // display quiz right away
+  buildQuiz();
+
+  // on submit, show results
+  submitButton.addEventListener("click", showResults);
+})();
+          
+        </script>
+    </body>
+
+    
+</html>
