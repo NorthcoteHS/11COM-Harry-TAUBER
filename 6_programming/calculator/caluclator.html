@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+
+        <style type="text/css">
+
+        </style>
+    </head>
+
+    <body>
+
+            <input id='box1' type='number'>
+
+              <select id='select' onchange="myFunction()">
+                <option value='Plus'>+</option>
+                <option value='Minus'>-</option>
+                <option value='Multiply'>x</option>
+                <option value='Divide'>÷</option>
+            </select>
+
+
+            <input id='box2' type='number'>
+
+            <input type=button onclick="myFunction()" id='submit' value="Calculate!">
+
+        <script>
+            function myFunction() {
+                var x = document.getElementById('box1').value;
+                var y = document.getElementById('box2').value;
+                var z = document.getElementById('select');
+                var select = z.options[z.selectedIndex].value;
+
+
+                if (select == "Plus") {
+                    alert(x+y)
+                }
+                if (select == "Minus") {
+                    alert(x-y)
+                }
+                if (select == "Multiply") {
+                    alert(x*y)
+                }
+                if (select == "Divide") {
+                    alert(x/y)
+                }
+            }
+
+        </script>
+    </body>
+</html>
